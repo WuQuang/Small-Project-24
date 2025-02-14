@@ -3,8 +3,8 @@ header("Content-Type: application/json");
 
 $host = "localhost"; #change as needed
 $user = "root"; #change as needed
-$password = ""; #change as needed
-$database = "contact_manager"; #change as needed
+$password = "0.JdGRj9oyXR"; #change as needed
+$database = "crud"; #change as needed
 
 $conn = new mysqli($host, $user, $password, $database);
 
