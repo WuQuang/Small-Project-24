@@ -6,12 +6,21 @@ $data = json_decode(file_get_contents("php://input"), true);
 $email = $data['email'];
 $password = $data['password'];
 
+// Run query to find user by email
 $result = $conn->query("SELECT * FROM users WHERE email='$email'");
-$user = $result->fetch_assoc();
 
-if ($user && password_verify($password, $user['password'])) {
-    echo json_encode(["token" => base64_encode($email)]);
+if ($result->num_rows > 0) {
+    $user = $result->fetch_assoc(); // Fetch user data
+
+    // Compare plain text passwords directly
+    if ($password === $user['password']) {
+        echo json_encode(["token" => base64_encode($email)]);
+    } else {
+        echo json_encode(["error" => "Invalid password"]);
+    }
 } else {
-    echo json_encode(["error" => "Invalid credentials"]);
+    echo json_encode(["error" => "User not found"]);
 }
+
+$conn->close();
 ?>
