@@ -1,4 +1,5 @@
 <?php
+session_start(); // Sessions for maintaining login
 header("Content-Type: application/json");
 include "config.php";
 
